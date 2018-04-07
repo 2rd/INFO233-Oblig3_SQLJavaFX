@@ -3,6 +3,8 @@ package DAO;
 import Entities.InvoiceItem;
 
 import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class InvoiceItemDAO {
     private static ConnectionDAO connection = new ConnectionDAO();
@@ -24,17 +26,22 @@ public class InvoiceItemDAO {
         }
     }
 
-    public static InvoiceItem getItemByInvoice(int invoiceId){
+    public static List<InvoiceItem> getItemsByInvoice(int invoiceId){
         Connection conn = connection.getConnection();
-        InvoiceItem invoiceItem = new InvoiceItem();
+        List<InvoiceItem> invoiceItems = new LinkedList<>();
+
         try {
             Statement statement = conn.createStatement();
             statement.setQueryTimeout(30);
 
             ResultSet itemResult = statement.executeQuery("SELECT * FROM invoice_items WHERE invoice = " + invoiceId);
 
-            invoiceItem.setInvoice(itemResult.getInt("invoice"));
-            invoiceItem.setProduct(itemResult.getInt("product"));
+            while (itemResult.next()) {
+                InvoiceItem invoiceItem = new InvoiceItem();
+                invoiceItem.setInvoice(itemResult.getInt("invoice"));
+                invoiceItem.setProduct(itemResult.getInt("product"));
+                invoiceItems.add(invoiceItem);
+            }
 
         }catch (SQLException e) {
             e.printStackTrace();
@@ -42,6 +49,6 @@ public class InvoiceItemDAO {
         finally {
             connection.closeConnection();
         }
-        return invoiceItem;
+        return invoiceItems;
     }
 }
