@@ -35,13 +35,13 @@ public class AddressDAO {
             Statement statement = conn.createStatement();
             statement.setQueryTimeout(30);
 
-            ResultSet addressResult = statement.executeQuery("SELECT * FROM invoice WHERE invoice_id = " + id);
+            ResultSet addressResult = statement.executeQuery("SELECT * FROM address WHERE address_id = " + id);
 
             invoice.setAddressId(addressResult.getInt("address_id"));
             invoice.setStreetNumber(addressResult.getString("street_number"));
             invoice.setStreetName(addressResult.getString("street_name"));
-            invoice.setStreetName(addressResult.getString("postal_code"));
-            invoice.setStreetName(addressResult.getString("postal_town"));
+            invoice.setPostalCode(addressResult.getString("postal_code"));
+            invoice.setPostalTown(addressResult.getString("postal_town"));
 
         }catch (SQLException e) {
             e.printStackTrace();

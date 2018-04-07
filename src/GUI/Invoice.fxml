@@ -1,26 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.text.Text?>
-<VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="GUI.InvoiceController"
-            prefHeight="400.0" prefWidth="600.0"
-            fx:id="parent">
-    
-    <Text fx:id="fDato"></Text>
-    <Text fx:id="fId"></Text>
 
-    <Text fx:id="fCustomer"></Text>
-    <Text fx:id="customerAdd"></Text>
-    <Text fx:id="prodName"></Text>
-    <Text fx:id="price"></Text>
-
-
-    <Button text="Tilbake" fx:id="backbut" onAction="#backBut_click"></Button>
+<VBox fx:id="parent" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.InvoiceController">
+   <children>
+      <Label prefHeight="27.0" prefWidth="79.0" text="Faktura" textAlignment="CENTER">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <HBox prefHeight="364.0" prefWidth="600.0">
+         <children>
+            <VBox prefHeight="341.0" prefWidth="164.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fakturadato:" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fakturanummer:" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kundenummer:" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kundenavn:" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse:" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Produkt:" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pris:" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+               
+                   <Text fx:id="fDato" wrappingWidth="122.0" />
+                   <Text fx:id="fId" />
+                   <Text fx:id="cNumber" strokeType="OUTSIDE" strokeWidth="0.0" />
+                   <Text fx:id="fCustomer" wrappingWidth="133.921875" />
+                   <Text fx:id="customerAdd" />
+                   <Text fx:id="prodName" />
+                   <Text fx:id="price" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   
+         
+             <Button fx:id="backbut" contentDisplay="CENTER" onAction="#backBut_click" text="Tilbake">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <effect>
+            <Blend />
+         </effect>
+      </Button>
+   </children>
 </VBox>

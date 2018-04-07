@@ -24,7 +24,7 @@ public class InvoiceItemDAO {
         }
     }
 
-    public static InvoiceItem getAddressByInvoice(int invoiceId){
+    public static InvoiceItem getItemByInvoice(int invoiceId){
         Connection conn = connection.getConnection();
         InvoiceItem invoiceItem = new InvoiceItem();
         try {
