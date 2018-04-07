@@ -50,4 +50,22 @@ public class CustomerDAO {
         }
         return customer;
     }
+
+    public static void removeCustomer(int id){
+        Connection conn = connection.getConnection();
+
+        try {
+            Statement statement = conn.createStatement();
+            statement.setQueryTimeout(30);
+
+            statement.executeQuery("DELETE FROM customer WHERE customer_id = " + id);
+
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            connection.closeConnection();
+        }
+    }
 }

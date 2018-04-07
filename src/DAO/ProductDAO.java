@@ -50,4 +50,19 @@ public class ProductDAO {
         }
         return product;
     }
+    public static void removeProduct(int id){
+        Connection conn = connection.getConnection();
+        try {
+            Statement statement = conn.createStatement();
+            statement.setQueryTimeout(30);
+
+            statement.executeQuery("DELETE * FROM product WHERE product_id = " + id);
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            connection.closeConnection();
+        }
+    }
 }

@@ -51,4 +51,19 @@ public class InvoiceItemDAO {
         }
         return invoiceItems;
     }
+
+    public static void removeInvoiceItem(int invoiceId){
+        Connection conn = connection.getConnection();
+        try {
+            Statement statement = conn.createStatement();
+            statement.setQueryTimeout(30);
+            statement.executeQuery("DELETE FROM invoice_items WHERE invoice = " + invoiceId);
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            connection.closeConnection();
+        }
+    }
 }

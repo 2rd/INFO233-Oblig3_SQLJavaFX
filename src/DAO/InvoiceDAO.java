@@ -27,7 +27,7 @@ public class InvoiceDAO {
         }
     }
 
-    public static Invoice getInvoiceById(int id){
+    public static Invoice getInvoiceById(int id) {
         Connection conn = connection.getConnection();
         Invoice invoice = new Invoice();
         try {
@@ -40,10 +40,9 @@ public class InvoiceDAO {
             invoice.setCustomer(invoiceResult.getInt("customer"));
             invoice.setDate(invoiceResult.getString("dato"));
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             connection.closeConnection();
         }
         return invoice;
@@ -57,7 +56,7 @@ public class InvoiceDAO {
         try {
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM invoice");
-            while (rs.next()){
+            while (rs.next()) {
                 currInvoice = new Invoice();
 
                 currInvoice.setInvoiceID(rs.getInt("invoice_id"));
@@ -69,11 +68,26 @@ public class InvoiceDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             connection.closeConnection();
         }
         return invoices;
     }
 
+    public static void removeInvoice(int id) {
+        Connection conn = connection.getConnection();
+        try    {
+            Statement statement = conn.createStatement();
+            statement.setQueryTimeout(30);
+            statement.executeQuery("DELETE FROM invoice WHERE invoice_id = " + id);
+
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            connection.closeConnection();
+        }
+    }
 }

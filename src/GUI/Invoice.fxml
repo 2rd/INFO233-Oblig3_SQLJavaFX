@@ -19,18 +19,17 @@
       </Label>
       <HBox prefHeight="364.0" prefWidth="600.0">
          <children>
-            <VBox prefHeight="341.0" prefWidth="164.0">
+            <VBox prefHeight="341.0" prefWidth="164.0" fx:id="labels">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fakturadato:" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fakturanummer:" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kundenummer:" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kundenavn:" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse:" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Produkt:" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pris:" />
+
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="200.0" prefWidth="100.0" fx:id="values">
                <children>
                
                    <Text fx:id="fDato" wrappingWidth="122.0" />
@@ -38,21 +37,15 @@
                    <Text fx:id="cNumber" strokeType="OUTSIDE" strokeWidth="0.0" />
                    <Text fx:id="fCustomer" wrappingWidth="133.921875" />
                    <Text fx:id="customerAdd" />
-                   <Text fx:id="prodName" />
-                   <Text fx:id="price" />
+
                </children>
             </VBox>
          </children>
       </HBox>
    
          
-             <Button fx:id="backbut" contentDisplay="CENTER" onAction="#backBut_click" text="Tilbake">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <effect>
-            <Blend />
-         </effect>
-      </Button>
+      <Button fx:id="backbut" contentDisplay="CENTER" onAction="#backBut_click" text="Hjem"></Button>
+      <Button fx:id="nextbut" contentDisplay="CENTER" onAction="#nextBut_click" text="Neste"></Button>
+      <Button fx:id="prevbut" contentDisplay="CENTER" onAction="#prevBut_click" text="Forrige"></Button>
    </children>
 </VBox>

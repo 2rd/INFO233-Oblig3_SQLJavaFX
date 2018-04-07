@@ -24,7 +24,7 @@ public class CategoryDAO {
         }
     }
 
-    public static Category getAddressById(int id){
+    public static Category getCategoryById(int id){
         Connection conn = connection.getConnection();
         Category category = new Category();
         try {
@@ -43,5 +43,22 @@ public class CategoryDAO {
             connection.closeConnection();
         }
         return category;
+    }
+
+    public static void removeCategory(int id){
+        Connection conn = connection.getConnection();
+
+        try {
+            Statement statement = conn.createStatement();
+            statement.setQueryTimeout(30);
+
+            statement.executeQuery("DELETE FROM category WHERE category_id = " + id);
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            connection.closeConnection();
+        }
     }
 }
