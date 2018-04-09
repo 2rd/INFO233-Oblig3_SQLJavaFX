@@ -79,7 +79,7 @@ public class InvoiceDAO {
         try    {
             Statement statement = conn.createStatement();
             statement.setQueryTimeout(30);
-            statement.executeQuery("DELETE FROM invoice WHERE invoice_id = " + id);
+            statement.executeUpdate("DELETE FROM invoice WHERE invoice_id = " + id);
 
         }catch(SQLException e)
         {

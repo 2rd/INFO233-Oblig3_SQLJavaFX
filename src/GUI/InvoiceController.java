@@ -23,15 +23,16 @@ import java.util.ResourceBundle;
 public class InvoiceController implements Initializable{
 
     @FXML
-    Text fDato, fId, cNumber, fCustomer, customerAdd;
+    Text fDato, fId, cNumber, fCustomer, customerName, street, town, account, totalPrice;
+
     @FXML
-    Text prodLabel, prodName, prodPrice, priceLabel, totalLabel, totalValue;
-    @FXML
-    VBox labels, values;
+    VBox products, prices;
+
     @FXML
     private Parent parent;
     private int currentIndex;
-    List<Invoice> invoices = InvoiceDAO.getAllInvoices();
+    private List<Invoice> invoices = InvoiceDAO.getAllInvoices();
+
     /**
      * Called to initialize a controller after its root element has been
      * completely processed.
@@ -59,49 +60,32 @@ public class InvoiceController implements Initializable{
         fId.setText("" + invoice.getInvoiceId());
         cNumber.setText("" + customer.getCustomerId());
         fCustomer.setText(customer.getCustomerName());
-        customerAdd.setText(address.getStreetName() + " " + address.getStreetNumber() + ", " + address.getPostalCode() + " " + address.getPostalTown());
-
+        customerName.setText(customer.getCustomerName());
+        account.setText(customer.getBillingAccount());
+        street.setText(address.getStreetName() + " " + address.getStreetNumber());
+        town.setText(address.getPostalCode() + " " + address.getPostalTown());
         displayItems(invoiceItems);
 
     }
     private void hideItems(){
-        values.getChildren().remove(prodName);
-        values.getChildren().remove(prodPrice);
-        labels.getChildren().remove(priceLabel);
-        labels.getChildren().remove(totalLabel);
+        products.getChildren().clear();
+        prices.getChildren().clear();
 
-        labels.getChildren().remove(prodLabel);
-
-        values.getChildren().remove(totalValue);
     }
     private void displayItems(List<InvoiceItem> invoiceItems){
 
         float totalPrice = 0;
         for (InvoiceItem item : invoiceItems) {
             Product product = ProductDAO.getProductById(item.getProduct());
-            Text prodLabel = new Text("Produkt:");
             Text prodName = new Text(product.getProductName());
-            Text priceLabel = new Text("Pris:");
             Text prodPrice = new Text(""+product.getPrice());
 
             totalPrice += product.getPrice();
-            labels.getChildren().add(prodLabel);
-            values.getChildren().add(prodName);
-            labels.getChildren().add(priceLabel);
-            values.getChildren().add(prodPrice);
-            this.prodLabel = prodLabel;
-            this.prodName = prodName;
-            this.priceLabel = priceLabel;
-            this.prodPrice = prodPrice;
+            products.getChildren().add(prodName);
+            prices.getChildren().add(prodPrice);
+
         }
-        Text totalLabel = new Text("Totalpris:");
-        Text totalValue = new Text(""+ totalPrice);
-
-        labels.getChildren().add(totalLabel);
-        values.getChildren().add(totalValue);
-        this.totalLabel = totalLabel;
-        this.totalValue = totalValue;
-
+        this.totalPrice.setText(""+totalPrice);
     }
 
     public void backBut_click(ActionEvent actionEvent) throws IOException {
@@ -124,4 +108,5 @@ public class InvoiceController implements Initializable{
             displayInvoice(currentIndex);
         }
     }
+
 }

@@ -17,8 +17,8 @@ public class Scene1Controller {
     private Parent parent;
 
     public void fbut_click() throws IOException {
-        VBox pane = FXMLLoader.load(getClass().getResource("Invoice.fxml"));
-        Scene scene = new Scene(pane, 500, 300);
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("Invoice.fxml"));
+        Scene scene = new Scene(pane);
         Stage stage = (Stage)parent.getScene().getWindow();
         stage.setScene(scene);
     }
