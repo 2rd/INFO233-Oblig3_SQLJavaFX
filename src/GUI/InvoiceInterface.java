@@ -20,7 +20,7 @@ public class InvoiceInterface extends Application{
 
         Parent root = FXMLLoader.load(getClass().getResource("scene1.fxml"));
         primaryStage.setTitle("The Super Sales Register 5000");
-        primaryStage.setScene(new Scene(root, 400, 275));
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
 
 

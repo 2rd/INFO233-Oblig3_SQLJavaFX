@@ -68,4 +68,25 @@ public class CustomerDAO {
             connection.closeConnection();
         }
     }
+
+    public static void editCustomer(Customer customer){
+        Connection conn = connection.getConnection();
+        int id = customer.getCustomerId();
+        try {
+            Statement statement = conn.createStatement();
+            statement.setQueryTimeout(30);
+
+            ResultSet customerResult = statement.executeQuery("UPDATE customer SET (customer_name, address, phone_number, billing_account) VALUES (?,?,?,?) WHERE customer_id = " + id);
+            customer.setCustomerName(customerResult.getString("customer_name"));
+            customer.setAddress(customerResult.getInt("address"));
+            customer.setPhoneNumber(customerResult.getString("phone_number"));
+            customer.setBillingAccount(customerResult.getString("billing_account"));
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            connection.closeConnection();
+        }
+    }
 }

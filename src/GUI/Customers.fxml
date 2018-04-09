@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CustomersController">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <HBox prefHeight="125.0" prefWidth="600.0" />
+            <HBox prefHeight="125.0" prefWidth="600.0">
+               <children>
+                  <VBox prefHeight="125.0" prefWidth="46.0">
+                     <children>
+                        <Label text="Id" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Navn" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="125.0" prefWidth="256.0">
+                     <children>
+                        <Label text="Adresse" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Telefon" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Konto" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="125.0" prefWidth="57.0">
+                     <children>
+                        <Label text="Endre" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="125.0" prefWidth="600.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
