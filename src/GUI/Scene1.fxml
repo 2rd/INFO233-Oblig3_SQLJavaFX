@@ -13,7 +13,7 @@
    <children>
        <Button fx:id="fbut" onAction="#fbut_click" text="Fakturaer" />
       <Button mnemonicParsing="false" onAction="#newInvoice_click" text="Opprett faktura" />
-      <Button mnemonicParsing="false" text="Opprett kunde" />
+      <Button mnemonicParsing="false" onAction="#newCustomer_click" text="Opprett kunde" />
       <Button mnemonicParsing="false" text="Opprett produkt" />
    </children>
 

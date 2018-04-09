@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.NewCustomerController">
+    <children>
+        <TextField fx:id="customerId" promptText="Kunde-ID" />
+        <TextField fx:id="customerName" promptText="Kundenavn" />
+        <TextField fx:id="phoneNr" promptText="Telefon" />
+        <TextField fx:id="account" promptText="FakturakontoNr" />
+        <TextField fx:id="addressId" promptText="adresseId" />
+        <TextField fx:id="streetName" promptText="Gatenavn" />
+        <TextField fx:id="streetNr" promptText="Husnummer" />
+        <TextField fx:id="postCode" promptText="Postnummer" />
+        <TextField fx:id="postTown" promptText="Poststed" />
+        <Button fx:id="enter" mnemonicParsing="false" onAction="#butAddCust_click" text="Opprett kunde" />
+        <Button fx:id="home" mnemonicParsing="false" onAction="#homeBut_click" text="Hjem" />
+    </children>
+</VBox>
