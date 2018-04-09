@@ -8,7 +8,7 @@ public class AddressDAO {
 
     private static ConnectionDAO connection = new ConnectionDAO();
 
-    public void addAddress(Address address) {
+    public static void addAddress(Address address) {
         Connection conn = connection.getConnection();
         try {
             Statement statement = conn.createStatement();

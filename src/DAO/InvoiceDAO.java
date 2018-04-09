@@ -9,7 +9,7 @@ import java.util.List;
 public class InvoiceDAO {
     private static ConnectionDAO connection = new ConnectionDAO();
 
-    public void addInvoice(Entities.Invoice invoice) {
+    public static void addInvoice(Entities.Invoice invoice) {
         Connection conn = connection.getConnection();
         try {
             Statement statement = conn.createStatement();

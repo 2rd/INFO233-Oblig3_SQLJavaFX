@@ -22,4 +22,10 @@ public class Scene1Controller {
         Stage stage = (Stage)parent.getScene().getWindow();
         stage.setScene(scene);
     }
+    public void newInvoice_click() throws IOException {
+        VBox pane = FXMLLoader.load(getClass().getResource("NewInvoice.fxml"));
+        Scene scene = new Scene(pane, 500, 300);
+        Stage stage = (Stage)parent.getScene().getWindow();
+        stage.setScene(scene);
+    }
 }

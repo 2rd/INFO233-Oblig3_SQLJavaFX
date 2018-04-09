@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<VBox fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.NewInvoiceController">
+   <children>
+      <TextField fx:id="invoiceId" promptText="invoice id" />
+      <TextField fx:id="customerId" promptText="customer id" />
+      <TextField fx:id="date" promptText="date" />
+      <TextField fx:id="prod1" promptText="produkt 1" />
+      <TextField fx:id="prod2" promptText="produkt 2" />
+      <Button fx:id="enter" mnemonicParsing="false" onAction="#button_addInvoice" text="Opprett faktura" />
+       <Button fx:id="home" mnemonicParsing="false" onAction="#homeBut_click" text="Hjem" />
+   </children>
+</VBox>

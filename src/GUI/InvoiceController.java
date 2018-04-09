@@ -10,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -26,10 +25,12 @@ public class InvoiceController implements Initializable{
     @FXML
     Text fDato, fId, cNumber, fCustomer, customerAdd;
     @FXML
+    Text prodLabel, prodName, prodPrice, priceLabel, totalLabel, totalValue;
+    @FXML
     VBox labels, values;
     @FXML
     private Parent parent;
-    int currentIndex;
+    private int currentIndex;
     List<Invoice> invoices = InvoiceDAO.getAllInvoices();
     /**
      * Called to initialize a controller after its root element has been
@@ -63,7 +64,16 @@ public class InvoiceController implements Initializable{
         displayItems(invoiceItems);
 
     }
+    private void hideItems(){
+        values.getChildren().remove(prodName);
+        values.getChildren().remove(prodPrice);
+        labels.getChildren().remove(priceLabel);
+        labels.getChildren().remove(totalLabel);
 
+        labels.getChildren().remove(prodLabel);
+
+        values.getChildren().remove(totalValue);
+    }
     private void displayItems(List<InvoiceItem> invoiceItems){
 
         float totalPrice = 0;
@@ -79,11 +89,19 @@ public class InvoiceController implements Initializable{
             values.getChildren().add(prodName);
             labels.getChildren().add(priceLabel);
             values.getChildren().add(prodPrice);
+            this.prodLabel = prodLabel;
+            this.prodName = prodName;
+            this.priceLabel = priceLabel;
+            this.prodPrice = prodPrice;
         }
         Text totalLabel = new Text("Totalpris:");
         Text totalValue = new Text(""+ totalPrice);
+
         labels.getChildren().add(totalLabel);
         values.getChildren().add(totalValue);
+        this.totalLabel = totalLabel;
+        this.totalValue = totalValue;
+
     }
 
     public void backBut_click(ActionEvent actionEvent) throws IOException {
@@ -95,12 +113,14 @@ public class InvoiceController implements Initializable{
     public void nextBut_click(ActionEvent actionEvent) throws IOException {
         if(currentIndex < invoices.size() - 1) {
             currentIndex += 1;
+            hideItems();
             displayInvoice(currentIndex);
         }
     }
     public void prevBut_click(ActionEvent actionEvent) throws IOException {
         if (currentIndex != 0) {
             currentIndex -= 1;
+            hideItems();
             displayInvoice(currentIndex);
         }
     }

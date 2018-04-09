@@ -7,7 +7,7 @@ import java.sql.*;
 public class CategoryDAO {
     private static ConnectionDAO connection = new ConnectionDAO();
 
-    public void addCategory(Category category) {
+    public static void addCategory(Category category) {
         Connection conn = connection.getConnection();
         try {
             Statement statement = conn.createStatement();
