@@ -7,10 +7,12 @@ import Entities.InvoiceItem;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,7 +21,9 @@ import java.util.ResourceBundle;
 
 public class NewInvoiceController implements Initializable{
     @FXML
-    TextField invoiceId, customerId, date, prod1, prod2;
+    TextField invoiceId, customerId, date;
+    @FXML
+    VBox products;
     @FXML
     private Parent parent;
     /**
@@ -66,12 +70,16 @@ public class NewInvoiceController implements Initializable{
     public void button_addInvoice()throws IOException{
         Invoice newInvoice = newInvoice();
         InvoiceDAO.addInvoice(newInvoice);
-        if (prod1.getText() != null){
-            InvoiceItemDAO.addInvoiceItem(newInvoiceItem(Integer.parseInt(prod1.getText()), newInvoice.getInvoiceId()));
-        }
-        if (prod2.getText() != null){
-            InvoiceItemDAO.addInvoiceItem(newInvoiceItem(Integer.parseInt(prod2.getText()), newInvoice.getInvoiceId()));
+        for (Node product : products.getChildren()) {
+            TextField productText = (TextField) product;
+            int productId = Integer.parseInt(productText.getText());
+            InvoiceItemDAO.addInvoiceItem(newInvoiceItem(productId, newInvoice.getInvoiceId()));
         }
         goHome();
+    }
+
+    public void newProd_click()throws IOException{
+        TextField additionalProduct = new TextField();
+        products.getChildren().add(additionalProduct);
     }
 }

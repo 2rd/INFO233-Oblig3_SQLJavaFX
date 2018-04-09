@@ -14,7 +14,8 @@
        <Button fx:id="fbut" onAction="#fbut_click" text="Fakturaer" />
       <Button mnemonicParsing="false" onAction="#newInvoice_click" text="Opprett faktura" />
       <Button mnemonicParsing="false" onAction="#newCustomer_click" text="Opprett kunde" />
-      <Button mnemonicParsing="false" text="Opprett produkt" />
+      <Button mnemonicParsing="false" onAction="#newProduct_click" text="Opprett produkt" />
+      <Button mnemonicParsing="false" onAction="#newCategory_click" text="Opprett kategori" />
    </children>
 
 

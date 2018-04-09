@@ -1,9 +1,7 @@
 package Entities;
 
 public class Product {
-    public int getProductId() {
-        return productId;
-    }
+    public int getProductId() { return productId; }
 
     public void setProductId(int productId) {
         this.productId = productId;

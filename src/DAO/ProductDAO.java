@@ -7,7 +7,7 @@ import java.sql.*;
 public class ProductDAO {
     private static ConnectionDAO connection = new ConnectionDAO();
 
-    public void addProduct(Product product) {
+    public static void addProduct(Product product) {
         Connection conn = connection.getConnection();
         try {
             Statement statement = conn.createStatement();

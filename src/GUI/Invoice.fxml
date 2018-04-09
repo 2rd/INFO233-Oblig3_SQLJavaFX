@@ -38,17 +38,17 @@
                         </Label>
                         <Text fx:id="customerName" strokeType="OUTSIDE" strokeWidth="0.0">
                            <VBox.margin>
-                              <Insets left="50.0" />
+                              <Insets left="20.0" />
                            </VBox.margin>
                         </Text>
                         <Text fx:id="street" strokeType="OUTSIDE" strokeWidth="0.0">
                            <VBox.margin>
-                              <Insets left="50.0" />
+                              <Insets left="20.0" />
                            </VBox.margin>
                         </Text>
                         <Text fx:id="town" strokeType="OUTSIDE" strokeWidth="0.0">
                            <VBox.margin>
-                              <Insets left="50.0" />
+                              <Insets left="20.0" />
                            </VBox.margin>
                         </Text>
                      </children>
