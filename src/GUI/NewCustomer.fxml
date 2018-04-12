@@ -1,23 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.NewCustomerController">
-    <children>
-        <TextField fx:id="customerId" promptText="Kunde-ID" />
-        <TextField fx:id="customerName" promptText="Kundenavn" />
-        <TextField fx:id="phoneNr" promptText="Telefon" />
-        <TextField fx:id="account" promptText="FakturakontoNr" />
-        <TextField fx:id="addressId" promptText="adresseId" />
-        <TextField fx:id="streetName" promptText="Gatenavn" />
-        <TextField fx:id="streetNr" promptText="Husnummer" />
-        <TextField fx:id="postCode" promptText="Postnummer" />
-        <TextField fx:id="postTown" promptText="Poststed" />
-        <Button fx:id="enter" mnemonicParsing="false" onAction="#butAddCust_click" text="Opprett kunde" />
-        <Button fx:id="home" mnemonicParsing="false" onAction="#homeBut_click" text="Hjem" />
-    </children>
-</VBox>
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.NewCustomerController">
+   <children>
+      <VBox>
+         <children>
+            <Label prefHeight="60.0" prefWidth="392.0" text="Ny Kunde">
+               <padding>
+                  <Insets bottom="15.0" left="20.0" right="100.0" top="10.0" />
+               </padding>
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <HBox prefHeight="277.0" prefWidth="600.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Kunde ID">
+                           <padding>
+                              <Insets bottom="4.0" top="4.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Navn">
+                           <padding>
+                              <Insets bottom="4.0" top="4.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Telefon">
+                           <padding>
+                              <Insets bottom="4.0" top="4.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Konto">
+                           <padding>
+                              <Insets bottom="4.0" top="4.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Adresse ID">
+                           <padding>
+                              <Insets bottom="4.0" top="4.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Gatenavn">
+                           <padding>
+                              <Insets bottom="4.0" top="4.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Gatenr">
+                           <padding>
+                              <Insets bottom="4.0" top="4.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Postnr">
+                           <padding>
+                              <Insets bottom="4.0" top="4.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Poststed">
+                           <padding>
+                              <Insets bottom="4.0" top="4.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="10.0" right="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="289.0" prefWidth="504.0">
+                      <children>
+                          <TextField fx:id="customerId" promptText="Kunde-ID" />
+                          <TextField fx:id="customerName" promptText="Kundenavn" />
+                          <TextField fx:id="phoneNr" promptText="Telefon" />
+                          <TextField fx:id="account" promptText="FakturakontoNr" />
+                          <TextField fx:id="addressId" promptText="adresseId" />
+                          <TextField fx:id="streetName" promptText="Gatenavn" />
+                          <TextField fx:id="streetNr" promptText="Husnummer" />
+                          <TextField fx:id="postCode" promptText="Postnummer" />
+                          <TextField fx:id="postTown" promptText="Poststed" />
+                      </children>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                    <Button fx:id="home" mnemonicParsing="false" onAction="#homeBut_click" text="Hjem">
+                     <HBox.margin>
+                        <Insets bottom="20.0" left="20.0" />
+                     </HBox.margin>
+                  </Button>
+                    <Button fx:id="enter" mnemonicParsing="false" onAction="#butAddCust_click" text="Opprett kunde">
+                     <HBox.margin>
+                        <Insets bottom="20.0" left="20.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,16 +1,17 @@
 package DAO;
 
 import Entities.InvoiceItem;
+import GUI.Main;
 
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
 public class InvoiceItemDAO {
-    private static ConnectionDAO connection = new ConnectionDAO();
+    private static Connection conn = Main.connextion;
 
     public static void addInvoiceItem(InvoiceItem invoiceItem) {
-        Connection conn = connection.getConnection();
+
         try {
             Statement statement = conn.createStatement();
             statement.setQueryTimeout(30);
@@ -21,13 +22,11 @@ public class InvoiceItemDAO {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        } finally {
-            connection.closeConnection();
         }
     }
 
     public static List<InvoiceItem> getItemsByInvoice(int invoiceId){
-        Connection conn = connection.getConnection();
+
         List<InvoiceItem> invoiceItems = new LinkedList<>();
 
         try {
@@ -46,14 +45,12 @@ public class InvoiceItemDAO {
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        finally {
-            connection.closeConnection();
-        }
+
         return invoiceItems;
     }
 
     public static void removeInvoiceItem(int invoiceId){
-        Connection conn = connection.getConnection();
+
         try {
             Statement statement = conn.createStatement();
             statement.setQueryTimeout(30);
@@ -62,8 +59,6 @@ public class InvoiceItemDAO {
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        finally {
-            connection.closeConnection();
-        }
+
     }
 }

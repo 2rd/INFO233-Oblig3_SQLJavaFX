@@ -15,7 +15,7 @@ public class ConnectionDAO {
      * Oppretter tilkobling til en database.
      * Legger til schema dersom databasen er tom.
      */
-    public Connection getConnection() {
+    public static Connection getConnection() {
 
         Connection conn = null;
         try {
@@ -31,7 +31,7 @@ public class ConnectionDAO {
         return conn;
     }
 
-    public void closeConnection(){
+    public static void closeConnection(){
         try{
             if(getConnection() != null){
                 getConnection().close();
@@ -42,7 +42,7 @@ public class ConnectionDAO {
         }
     }
 
-    private void setSchema(Connection conn){
+    private static void setSchema(Connection conn){
         if(countTables(conn) == 0){
             SQLExecutor.executeSQL(conn, schema);
             System.out.println("schema lagt til...");
@@ -53,7 +53,7 @@ public class ConnectionDAO {
      * @param conn tilkoblingen til databasen.
      * @return antall tabeller i databasen.
      */
-    private int countTables(Connection conn){
+    private static int countTables(Connection conn){
 
         int count = 0;
         try {

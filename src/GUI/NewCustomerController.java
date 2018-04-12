@@ -10,7 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,9 +24,11 @@ public class NewCustomerController {
     @FXML
     Parent parent;
 
+    CustomerDAO customerDAO = new CustomerDAO();
+
     public void butAddCust_click(ActionEvent actionEvent) throws IOException {
         AddressDAO.addAddress(newAddress());
-        CustomerDAO.addCustomer(newCustomer());
+        customerDAO.addCustomer(newCustomer());
         goHome();
     }
 
@@ -34,8 +36,8 @@ public class NewCustomerController {
         goHome();
     }
     public void goHome() throws IOException{
-        HBox pane = FXMLLoader.load(getClass().getResource("Scene1.fxml"));
-        Scene scene = new Scene(pane, 500, 300);
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("Scene1.fxml"));
+        Scene scene = new Scene(pane);
         Stage stage = (Stage)parent.getScene().getWindow();
         stage.setScene(scene);
     }

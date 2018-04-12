@@ -1,15 +1,25 @@
 package DAO;
 
 import Entities.Address;
+import GUI.Main;
 
 import java.sql.*;
 
 public class AddressDAO {
 
-    private static ConnectionDAO connection = new ConnectionDAO();
+    private static Connection conn = Main.connextion;
+
+    private static AddressDAO addressDAO = null;
+
+    public static AddressDAO getInstance() {
+        if (addressDAO == null) {
+            addressDAO = new AddressDAO();
+        }
+        return addressDAO;
+    }
 
     public static void addAddress(Address address) {
-        Connection conn = connection.getConnection();
+
         try {
             Statement statement = conn.createStatement();
             statement.setQueryTimeout(30);
@@ -23,13 +33,12 @@ public class AddressDAO {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        } finally {
-            connection.closeConnection();
+
         }
     }
 
-    public static Address getAddressById(int id){
-        Connection conn = connection.getConnection();
+    public static Address getAddressById(int id) {
+
         Address address = new Address();
         try {
             Statement statement = conn.createStatement();
@@ -43,29 +52,25 @@ public class AddressDAO {
             address.setPostalCode(addressResult.getString("postal_code"));
             address.setPostalTown(addressResult.getString("postal_town"));
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        finally {
-            connection.closeConnection();
-        }
+
         return address;
     }
 
-    public static void removeAddress(int id){
-        Connection conn = connection.getConnection();
 
-        try {
-            Statement statement = conn.createStatement();
-            statement.setQueryTimeout(30);
+        public static void removeAddress ( int id){
 
-            statement.executeQuery("DELETE FROM address WHERE address_id = " + id);
+            try {
+                Statement statement = conn.createStatement();
+                statement.setQueryTimeout(30);
 
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally {
-            connection.closeConnection();
+                statement.executeQuery("DELETE FROM address WHERE address_id = " + id);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
         }
     }
-}

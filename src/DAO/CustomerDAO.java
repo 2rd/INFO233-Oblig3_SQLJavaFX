@@ -1,14 +1,24 @@
 package DAO;
 
 import Entities.Customer;
+import GUI.Main;
 
 import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class CustomerDAO {
-    private static ConnectionDAO connection = new ConnectionDAO();
+    private static CustomerDAO customerDAO = null;
+    private static Connection conn = Main.connextion;
 
+    public static CustomerDAO getInstance(){
+       if(customerDAO == null) {
+           customerDAO = new CustomerDAO();
+       }
+       return customerDAO;
+    }
     public static void addCustomer(Customer customer) {
-        Connection conn = connection.getConnection();
+
         try {
             Statement statement = conn.createStatement();
             statement.setQueryTimeout(30);
@@ -22,13 +32,11 @@ public class CustomerDAO {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        } finally {
-            connection.closeConnection();
         }
     }
 
     public static Customer getCustomerById(int id){
-        Connection conn = connection.getConnection();
+
         Customer customer = new Customer();
         try {
             Statement statement = conn.createStatement();
@@ -45,14 +53,11 @@ public class CustomerDAO {
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        finally {
-            connection.closeConnection();
-        }
+
         return customer;
     }
 
     public static void removeCustomer(int id){
-        Connection conn = connection.getConnection();
 
         try {
             Statement statement = conn.createStatement();
@@ -64,29 +69,54 @@ public class CustomerDAO {
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        finally {
-            connection.closeConnection();
+
+    }
+
+    public static List<Customer> getAllCustomers() {
+        List<Customer> customers = new LinkedList<Customer>();
+
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM customer");
+            while (rs.next()) {
+                Customer currCustomer = new Customer();
+
+                currCustomer.setCustomerId(rs.getInt("customer_id"));
+                currCustomer.setCustomerName(rs.getString("customer_name"));
+                currCustomer.setAddress(rs.getInt("address"));
+                currCustomer.setPhoneNumber(rs.getString("phone_number"));
+                currCustomer.setBillingAccount(rs.getString("billing_account"));
+
+                customers.add(currCustomer);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        return customers;
     }
 
     public static void editCustomer(Customer customer){
-        Connection conn = connection.getConnection();
-        int id = customer.getCustomerId();
-        try {
-            Statement statement = conn.createStatement();
-            statement.setQueryTimeout(30);
 
-            ResultSet customerResult = statement.executeQuery("UPDATE customer SET (customer_name, address, phone_number, billing_account) VALUES (?,?,?,?) WHERE customer_id = " + id);
-            customer.setCustomerName(customerResult.getString("customer_name"));
-            customer.setAddress(customerResult.getInt("address"));
-            customer.setPhoneNumber(customerResult.getString("phone_number"));
-            customer.setBillingAccount(customerResult.getString("billing_account"));
+        try {
+
+            PreparedStatement customerResult = conn.prepareStatement("UPDATE customer SET " +
+                    "customer_name = ?," +
+                    " address = ?," +
+                    " phone_number = ?," +
+                    " billing_account = ?" +
+                    "WHERE customer_id = " + customer.getCustomerId());
+            customerResult.setString(1, customer.getCustomerName());
+            customerResult.setInt(2, customer.getAddress());
+            customerResult.setString(3, customer.getPhoneNumber());
+            customerResult.setString(4, customer.getBillingAccount());
+
+            customerResult.executeUpdate();
 
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        finally {
-            connection.closeConnection();
-        }
+
     }
 }

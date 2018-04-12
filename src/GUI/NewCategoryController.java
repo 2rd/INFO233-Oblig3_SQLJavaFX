@@ -1,16 +1,14 @@
 package GUI;
 
 import DAO.CategoryDAO;
-import DAO.ProductDAO;
 import Entities.Category;
-import Entities.Product;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -30,8 +28,8 @@ public class NewCategoryController {
         goHome();
     }
     public void goHome() throws IOException{
-        HBox pane = FXMLLoader.load(getClass().getResource("Scene1.fxml"));
-        Scene scene = new Scene(pane, 500, 300);
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("Scene1.fxml"));
+        Scene scene = new Scene(pane);
         Stage stage = (Stage)parent.getScene().getWindow();
         stage.setScene(scene);
     }

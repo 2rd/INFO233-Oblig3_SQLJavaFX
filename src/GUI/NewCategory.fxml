@@ -1,24 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="parent"
-            xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="GUI.NewCategoryController"
-            prefHeight="400.0" prefWidth="600.0">
-    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-        <children>
-            <TextField fx:id="categoryId" promptText="Kategori ID" />
-            <TextField fx:id="categoryName" promptText="KategoriNavn" />
-
-
-            <Button fx:id="enter" mnemonicParsing="false" onAction="#addCat_click" text="Opprett kategori" />
-            <Button fx:id="home" mnemonicParsing="false" onAction="#homeBut_click" text="Hjem" />
-        </children>
-    </VBox>
+<AnchorPane fx:id="parent" prefHeight="203.0" prefWidth="361.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.NewCategoryController">
+   <children>
+      <VBox>
+         <children>
+            <Label text="Ny Kategori">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="103.0" prefWidth="458.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Kategori ID">
+                           <VBox.margin>
+                              <Insets bottom="4.0" left="4.0" top="4.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Kategorinavn">
+                           <VBox.margin>
+                              <Insets left="4.0" top="4.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+                   <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="312.0">
+                       <children>
+                           <TextField fx:id="categoryId" promptText="Kategori ID">
+                           <VBox.margin>
+                              <Insets right="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                           <TextField fx:id="categoryName" promptText="KategoriNavn">
+                           <VBox.margin>
+                              <Insets right="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                       </children>
+                   </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="8.0" prefWidth="458.0">
+               <children>
+                     <Button fx:id="home" mnemonicParsing="false" onAction="#homeBut_click" text="Hjem">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </Button>
+         
+         
+                     <Button fx:id="enter" mnemonicParsing="false" onAction="#addCat_click" text="Opprett kategori">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>

@@ -10,7 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -32,6 +32,7 @@ public class InvoiceController implements Initializable{
     private Parent parent;
     private int currentIndex;
     private List<Invoice> invoices = InvoiceDAO.getAllInvoices();
+    private AddressDAO addressDAO = AddressDAO.getInstance();
 
     /**
      * Called to initialize a controller after its root element has been
@@ -55,7 +56,7 @@ public class InvoiceController implements Initializable{
         Entities.Customer customer = CustomerDAO.getCustomerById(invoice.getCustomer());
         List<InvoiceItem> invoiceItems = InvoiceItemDAO.getItemsByInvoice(invoice.getInvoiceId());
 
-        Entities.Address address = AddressDAO.getAddressById(customer.getAddress());
+        Entities.Address address = addressDAO.getAddressById(customer.getAddress());
         fDato.setText(invoice.getDate());
         fId.setText("" + invoice.getInvoiceId());
         cNumber.setText("" + customer.getCustomerId());
@@ -89,8 +90,8 @@ public class InvoiceController implements Initializable{
     }
 
     public void backBut_click(ActionEvent actionEvent) throws IOException {
-        HBox pane = FXMLLoader.load(getClass().getResource("Scene1.fxml"));
-        Scene scene = new Scene(pane, 500, 300);
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("Scene1.fxml"));
+        Scene scene = new Scene(pane);
         Stage stage = (Stage)parent.getScene().getWindow();
         stage.setScene(scene);
     }

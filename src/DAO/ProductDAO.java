@@ -1,14 +1,15 @@
 package DAO;
 
 import Entities.Product;
+import GUI.Main;
 
 import java.sql.*;
 
 public class ProductDAO {
-    private static ConnectionDAO connection = new ConnectionDAO();
+    private static Connection conn = Main.connextion;
 
     public static void addProduct(Product product) {
-        Connection conn = connection.getConnection();
+
         try {
             Statement statement = conn.createStatement();
             statement.setQueryTimeout(30);
@@ -22,13 +23,11 @@ public class ProductDAO {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        } finally {
-            connection.closeConnection();
         }
     }
 
     public static Product getProductById(int id){
-        Connection conn = connection.getConnection();
+
         Product product = new Product();
         try {
             Statement statement = conn.createStatement();
@@ -45,13 +44,11 @@ public class ProductDAO {
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        finally {
-            connection.closeConnection();
-        }
+
         return product;
     }
     public static void removeProduct(int id){
-        Connection conn = connection.getConnection();
+
         try {
             Statement statement = conn.createStatement();
             statement.setQueryTimeout(30);
@@ -61,8 +58,6 @@ public class ProductDAO {
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        finally {
-            connection.closeConnection();
-        }
+
     }
 }

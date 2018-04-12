@@ -1,16 +1,17 @@
 package DAO;
 
 import Entities.Invoice;
+import GUI.Main;
 
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
 public class InvoiceDAO {
-    private static ConnectionDAO connection = new ConnectionDAO();
+    private static Connection conn = Main.connextion;
 
     public static void addInvoice(Entities.Invoice invoice) {
-        Connection conn = connection.getConnection();
+
         try {
             Statement statement = conn.createStatement();
             statement.setQueryTimeout(30);
@@ -22,13 +23,11 @@ public class InvoiceDAO {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        } finally {
-            connection.closeConnection();
         }
     }
 
     public static Invoice getInvoiceById(int id) {
-        Connection conn = connection.getConnection();
+
         Invoice invoice = new Invoice();
         try {
             Statement statement = conn.createStatement();
@@ -42,8 +41,6 @@ public class InvoiceDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            connection.closeConnection();
         }
         return invoice;
     }
@@ -51,7 +48,7 @@ public class InvoiceDAO {
     public static List<Invoice> getAllInvoices() {
         Invoice currInvoice = new Invoice();
         java.util.List<Invoice> invoices = new LinkedList<Invoice>();
-        Connection conn = connection.getConnection();
+
 
         try {
             Statement statement = conn.createStatement();
@@ -68,14 +65,12 @@ public class InvoiceDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            connection.closeConnection();
         }
         return invoices;
     }
 
     public static void removeInvoice(int id) {
-        Connection conn = connection.getConnection();
+
         try    {
             Statement statement = conn.createStatement();
             statement.setQueryTimeout(30);
@@ -84,10 +79,6 @@ public class InvoiceDAO {
         }catch(SQLException e)
         {
             e.printStackTrace();
-        }
-        finally
-        {
-            connection.closeConnection();
         }
     }
 }

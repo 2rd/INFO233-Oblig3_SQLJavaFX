@@ -1,14 +1,15 @@
 package DAO;
 
 import Entities.Category;
+import GUI.Main;
 
 import java.sql.*;
 
 public class CategoryDAO {
-    private static ConnectionDAO connection = new ConnectionDAO();
+    private static Connection conn = Main.connextion;
 
     public static void addCategory(Category category) {
-        Connection conn = connection.getConnection();
+
         try {
             Statement statement = conn.createStatement();
             statement.setQueryTimeout(30);
@@ -19,13 +20,11 @@ public class CategoryDAO {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        } finally {
-            connection.closeConnection();
         }
     }
 
     public static Category getCategoryById(int id){
-        Connection conn = connection.getConnection();
+
         Category category = new Category();
         try {
             Statement statement = conn.createStatement();
@@ -39,14 +38,11 @@ public class CategoryDAO {
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        finally {
-            connection.closeConnection();
-        }
+
         return category;
     }
 
     public static void removeCategory(int id){
-        Connection conn = connection.getConnection();
 
         try {
             Statement statement = conn.createStatement();
@@ -56,9 +52,6 @@ public class CategoryDAO {
 
         }catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally {
-            connection.closeConnection();
         }
     }
 }
