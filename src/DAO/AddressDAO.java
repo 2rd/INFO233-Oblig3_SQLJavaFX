@@ -4,6 +4,8 @@ import Entities.Address;
 import GUI.Main;
 
 import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class AddressDAO {
 
@@ -60,7 +62,7 @@ public class AddressDAO {
     }
 
 
-        public static void removeAddress ( int id){
+    public static void removeAddress ( int id){
 
             try {
                 Statement statement = conn.createStatement();
@@ -71,6 +73,53 @@ public class AddressDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+    }
 
+    public static List<Address> getAllAddresses() {
+        List<Address> addresses = new LinkedList<Address>();
+
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM address");
+            while (rs.next()) {
+                Address currAddress = new Address();
+
+                currAddress.setAddressId(rs.getInt("address_id"));
+                currAddress.setStreetName(rs.getString("street_name"));
+                currAddress.setStreetNumber(rs.getString("street_number"));
+                currAddress.setPostalTown(rs.getString("postal_town"));
+                currAddress.setPostalCode(rs.getString("postal_code"));
+
+                addresses.add(currAddress);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        return addresses;
+    }
+
+    public static void editAddress(Address address){
+
+        try {
+
+            PreparedStatement addressResult = conn.prepareStatement("UPDATE address SET " +
+                    "street_name = ?," +
+                    " street_number = ?," +
+                    " postal_code = ?," +
+                    " postal_town = ?" +
+                    "WHERE address_id = " + address.getAddressId());
+            addressResult.setString(1, address.getStreetName());
+            addressResult.setString(2, address.getStreetNumber());
+            addressResult.setString(3, address.getPostalCode());
+            addressResult.setString(4, address.getPostalTown());
+
+            addressResult.executeUpdate();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
     }

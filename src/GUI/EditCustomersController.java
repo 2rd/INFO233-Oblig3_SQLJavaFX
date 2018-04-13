@@ -25,19 +25,19 @@ import java.util.ResourceBundle;
 
 public class EditCustomersController implements Initializable{
 
-    private int currentID;
-    private Insets insets = new Insets(5, 5, 5, 5);
+
+
 
     @FXML
     VBox custID, custName, fullAddress, phone, account, currCust, editFields, editLabels;
 
     @FXML
-    TextField ID;
+    TextField ID, newName, newAddress, newPhone, newAccount;
 
     @FXML
     Parent parent;
 
-    CustomerDAO customerDAO = CustomerDAO.getInstance();
+
     /**
      * Called to initialize a controller after its root element has been
      * completely processed.
@@ -56,9 +56,10 @@ public class EditCustomersController implements Initializable{
     }
 
     private void displayCustomers() throws IOException {
-        List<Customer> allCustomers = customerDAO.getAllCustomers();
+
+        List<Customer> allCustomers = CustomerDAO.getAllCustomers();
         for (Customer customer : allCustomers) {
-            Address address = AddressDAO.getAddressById(customer.getCustomerId());
+            Address address = AddressDAO.getAddressById(customer.getAddress());
             Text id = new Text(""+customer.getCustomerId());
             Text name = new Text(customer.getCustomerName());
             Text addr = new Text(address.getStreetName() + " " + address.getStreetNumber() + ", " +
@@ -75,59 +76,6 @@ public class EditCustomersController implements Initializable{
         }
     }
 
-    public void displayEditCustomer(int id){
-        currCust.getChildren().clear();
-        Customer customer = customerDAO.getCustomerById(id);
-        Address address = AddressDAO.getAddressById(customer.getCustomerId());
-        Text custId = new Text(""+customer.getCustomerId());
-        Text name = new Text(customer.getCustomerName());
-        Text addr = new Text(address.getStreetName() + " " + address.getStreetNumber() + ", " +
-                address.getPostalCode() + " " + address.getPostalTown());
-        Text pNumber = new Text(customer.getPhoneNumber());
-        Text aNumber = new Text(customer.getBillingAccount());
-        currCust.getChildren().add(custId);
-        currCust.getChildren().add(name);
-        currCust.getChildren().add(addr);
-        currCust.getChildren().add(pNumber);
-        currCust.getChildren().add(aNumber);
-        currCust.setSpacing(5);
-    }
-
-    public void displayEditLabels(){
-        Label newName = new Label("Nytt navn: ");
-        Label newPNumber = new Label("Nytt tlf-nr: ");
-        Label newANumber = new Label("Nytt kontonr: ");
-
-        newName.setPadding(insets);
-        newPNumber.setPadding(insets);
-        newANumber.setPadding(insets);
-
-        editLabels.getChildren().add(newName);
-        editLabels.getChildren().add(newPNumber);
-        editLabels.getChildren().add(newANumber);
-    }
-
-    public void displayEditFields(){
-        TextField newName = new TextField("Nytt navn");
-        TextField newPNumber = new TextField("Nytt tlf-nr");
-        TextField newANumber = new TextField("Nytt kontonr");
-        newName.setId("newName");
-        newPNumber.setId("newPNumber");
-        newANumber.setId("newANumber");
-        editFields.getChildren().add(newName);
-        editFields.getChildren().add(newPNumber);
-        editFields.getChildren().add(newANumber);
-        Button enter = new Button();
-        enter.setOnAction(event -> {
-            try {
-                enterUpdates_click();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        editFields.getChildren().add(enter);
-    }
-
     public void update() throws IOException{
         AnchorPane pane = FXMLLoader.load(getClass().getResource("EditCustomer.fxml"));
         Scene scene = new Scene(pane);
@@ -135,23 +83,33 @@ public class EditCustomersController implements Initializable{
         stage.setScene(scene);
     }
 
-    public void enterUpdates_click() throws IOException{
-        Customer customer = customerDAO.getCustomerById(currentID);
-        customer.setCustomerName("Tormod Torsen");
-        customer.setCustomerId(3);
-        customer.setPhoneNumber("991 44 299");
-        customer.setBillingAccount("4444 44 4444");
-        customerDAO.addCustomer(customer);
-        update();
+    public void edit_click() throws IOException{
+        if(!ID.getText().trim().isEmpty()){
+            updateCustomer();
+            update();
+        } else {
+            currCust.getChildren().add(new Text("***Kunde ID er obligatorisk***"));
+        }
 
     }
 
-    public void edit_click() throws IOException{
+    public void updateCustomer(){
+
         int id = Integer.parseInt(ID.getText());
-        this.currentID = id;
-        displayEditCustomer(id);
-        displayEditLabels();
-        displayEditFields();
+        Customer customer = CustomerDAO.getCustomerById(id);
+        if(!newName.getText().trim().isEmpty()){
+            customer.setCustomerName(newName.getText());
+        }
+        if (!newAddress.getText().trim().isEmpty()){
+            customer.setAddress(Integer.parseInt(newAddress.getText()));
+        }
+        if(!newPhone.getText().trim().isEmpty()){
+            customer.setPhoneNumber(newPhone.getText());
+        }
+        if(!newAccount.getText().trim().isEmpty()){
+            customer.setBillingAccount(newAccount.getText());
+        }
+        CustomerDAO.editCustomer(customer);
     }
 
     public void homebut_click() throws IOException{

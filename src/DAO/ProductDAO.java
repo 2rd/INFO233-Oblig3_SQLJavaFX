@@ -4,6 +4,8 @@ import Entities.Product;
 import GUI.Main;
 
 import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ProductDAO {
     private static Connection conn = Main.connextion;
@@ -54,6 +56,54 @@ public class ProductDAO {
             statement.setQueryTimeout(30);
 
             statement.executeQuery("DELETE * FROM product WHERE product_id = " + id);
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static List<Product> getAllProducts() {
+        List<Product> products = new LinkedList<Product>();
+
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM product");
+            while (rs.next()) {
+                Product currProd = new Product();
+
+                currProd.setProductId(rs.getInt("product_id"));
+                currProd.setProductName(rs.getString("product_name"));
+                currProd.setDescription(rs.getString("description"));
+                currProd.setPrice(rs.getFloat("price"));
+                currProd.setCategory(rs.getInt("category"));
+
+                products.add(currProd);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return products;
+    }
+
+    public static void editProduct(Product product){
+
+        try {
+
+            PreparedStatement productResult = conn.prepareStatement("UPDATE product SET " +
+                    "product_name = ?," +
+                    " description = ?," +
+                    " price = ?," +
+                    " category = ?" +
+                    "WHERE product_id = " + product.getProductId());
+            productResult.setString(1, product.getProductName());
+            productResult.setString(2, product.getDescription());
+            productResult.setFloat(3, product.getPrice());
+            productResult.setInt(4, product.getCategory());
+
+            productResult.executeUpdate();
 
         }catch (SQLException e) {
             e.printStackTrace();

@@ -44,10 +44,39 @@ public class Scene1Controller {
         stage.setScene(scene);
     }
 
-    public void customers_click() throws IOException{
+    public void editCustomers_click() throws IOException{
         AnchorPane pane = FXMLLoader.load(getClass().getResource("EditCustomer.fxml"));
         Scene scene = new Scene(pane);
         Stage stage = (Stage)parent.getScene().getWindow();
         stage.setScene(scene);
     }
+
+    public void editInvoices_click() throws IOException{
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("EditInvoice.fxml"));
+        Scene scene = new Scene(pane);
+        Stage stage = (Stage)parent.getScene().getWindow();
+        stage.setScene(scene);
+    }
+
+    public void editAddresses_click() throws IOException{
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("EditAddress.fxml"));
+        Scene scene = new Scene(pane);
+        Stage stage = (Stage)parent.getScene().getWindow();
+        stage.setScene(scene);
+    }
+
+    public void editCategories_click() throws IOException{
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("EditCategory.fxml"));
+        Scene scene = new Scene(pane);
+        Stage stage = (Stage)parent.getScene().getWindow();
+        stage.setScene(scene);
+    }
+
+    public void editProducts_click() throws IOException{
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("EditProduct.fxml"));
+        Scene scene = new Scene(pane);
+        Stage stage = (Stage)parent.getScene().getWindow();
+        stage.setScene(scene);
+    }
+
 }

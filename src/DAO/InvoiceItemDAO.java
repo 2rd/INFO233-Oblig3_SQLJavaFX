@@ -61,4 +61,19 @@ public class InvoiceItemDAO {
         }
 
     }
+
+    public static void editInvoiceItem(InvoiceItem item){
+        try {
+            PreparedStatement itemResult = conn.prepareStatement("UPDATE invoice_items SET " +
+                    "product = ?," +
+                    "WHERE invoice_id = " + item.getInvoice());
+            itemResult.setInt(1, item.getProduct());
+
+            itemResult.executeUpdate();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

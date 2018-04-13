@@ -81,4 +81,22 @@ public class InvoiceDAO {
             e.printStackTrace();
         }
     }
+
+    public static void editInvoice(Invoice invoice){
+        try {
+
+            PreparedStatement invoiceResult = conn.prepareStatement("UPDATE invoice SET " +
+                    "customer = ?," +
+                    " date = ?," +
+                    "WHERE invoice_id = " + invoice.getInvoiceId());
+            invoiceResult.setInt(1, invoice.getCustomer());
+            invoiceResult.setString(2, invoice.getDate());
+
+            invoiceResult.executeUpdate();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

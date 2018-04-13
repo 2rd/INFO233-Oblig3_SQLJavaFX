@@ -4,6 +4,8 @@ import Entities.Category;
 import GUI.Main;
 
 import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class CategoryDAO {
     private static Connection conn = Main.connextion;
@@ -53,5 +55,43 @@ public class CategoryDAO {
         }catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static List<Category> getAllCategories() {
+        Category currCategory = new Category();
+        List<Category> categories = new LinkedList<Category>();
+
+
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM category");
+            while (rs.next()) {
+                currCategory = new Category();
+
+                currCategory.setCategoryId(rs.getInt("category_id"));
+                currCategory.setCategoryName(rs.getString("category_name"));
+
+                categories.add(currCategory);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return categories;
+    }
+
+    public static void editCategory(Category category){
+        try {
+            PreparedStatement categoryResult = conn.prepareStatement("UPDATE category SET " +
+                    "category_name = ?" +
+                    "WHERE category_id = " + category.getCategoryId());
+            categoryResult.setString(1, category.getCategoryName());
+
+            categoryResult.executeUpdate();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
