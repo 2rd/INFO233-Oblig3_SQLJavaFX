@@ -19,26 +19,23 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class NewInvoiceController implements Initializable{
+/**
+ * Controller for FXML-filen NewInvoice.
+ * Gjør det mulig å legge til nye fakturaer i databasen.
+ * @author Tord Kvifte, 13.04.2018
+ */
+public class NewInvoiceController{
     @FXML
     TextField invoiceId, customerId, date;
     @FXML
     VBox products;
     @FXML
     private Parent parent;
+
     /**
-     * Called to initialize a controller after its root element has been
-     * completely processed.
-     *
-     * @param location  The location used to resolve relative paths for the root object, or
-     *                  {@code null} if the location is not known.
-     * @param resources The resources used to localize the root object, or {@code null} if
+     * laster inn scene1.
+     * @throws IOException
      */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
-
     public void goHome() throws IOException{
         AnchorPane pane = FXMLLoader.load(getClass().getResource("Scene1.fxml"));
         Scene scene = new Scene(pane);
@@ -46,12 +43,18 @@ public class NewInvoiceController implements Initializable{
         stage.setScene(scene);
     }
 
+    /**
+     * Laster inn Scene1 når klikket.
+     * @throws IOException
+     */
     public void homeBut_click()throws IOException{
         goHome();
     }
 
-
-
+    /**
+     * Oppretter en ny faktura basert på data fra tekstfeltene.
+     * @throws IOException
+     */
     public Invoice newInvoice(){
         Invoice newInvoice = new Invoice();
         newInvoice.setInvoiceID(Integer.parseInt(invoiceId.getText()));
@@ -60,6 +63,10 @@ public class NewInvoiceController implements Initializable{
         return newInvoice;
     }
 
+    /**
+     * Oppretter en ny invoice item basert på data fra tekstfeltene.
+     * @throws IOException
+     */
     public InvoiceItem newInvoiceItem(int productId, int invoiceId){
         InvoiceItem newItem = new InvoiceItem();
         newItem.setProduct(productId);
@@ -67,6 +74,10 @@ public class NewInvoiceController implements Initializable{
         return newItem;
     }
 
+    /**
+     * Legger til ny faktura i databasen og går til scene1 når klikket.
+     * @throws IOException
+     */
     public void button_addInvoice()throws IOException{
         Invoice newInvoice = newInvoice();
         InvoiceDAO.addInvoice(newInvoice);
@@ -78,6 +89,10 @@ public class NewInvoiceController implements Initializable{
         goHome();
     }
 
+    /**
+     * Legger til et ekstra tekstfelt når klikket.
+     * @throws IOException
+     */
     public void newProd_click()throws IOException{
         TextField additionalProduct = new TextField();
         products.getChildren().add(additionalProduct);

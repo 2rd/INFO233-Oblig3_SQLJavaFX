@@ -7,6 +7,9 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Klasse for å aksessere Kundetabellen i databasen.
+ */
 public class CustomerDAO {
     private static CustomerDAO customerDAO = null;
     private static Connection conn = Main.connextion;
@@ -17,6 +20,10 @@ public class CustomerDAO {
        }
        return customerDAO;
     }
+    /**
+     * Legger til en kunde i databasen.
+     * @param customer kunden som skal legges til.
+     */
     public static void addCustomer(Customer customer) {
 
         try {
@@ -35,6 +42,11 @@ public class CustomerDAO {
         }
     }
 
+    /**
+     * Hent en kunde fra databasen.
+     * @param id id'en til kunden som skal hentes
+     * @return Kunden som skal hentes.
+     */
     public static Customer getCustomerById(int id){
 
         Customer customer = new Customer();
@@ -57,23 +69,12 @@ public class CustomerDAO {
         return customer;
     }
 
-    public static void removeCustomer(int id){
-
-        try {
-            Statement statement = conn.createStatement();
-            statement.setQueryTimeout(30);
-
-            statement.executeQuery("DELETE FROM customer WHERE customer_id = " + id);
-
-
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
-
+    /**
+     * Hent alle kundene i tabellen.
+     * @return en liste med alle kundene i databasen.
+     */
     public static List<Customer> getAllCustomers() {
-        List<Customer> customers = new LinkedList<Customer>();
+        List<Customer> customers = new LinkedList<>();
 
         try {
             Statement statement = conn.createStatement();
@@ -97,6 +98,10 @@ public class CustomerDAO {
         return customers;
     }
 
+    /**
+     * Endre en eksisterende kunde i databasen.
+     * @param customer Kunden med evt nye egenskaper.
+     */
     public static void editCustomer(Customer customer){
 
         try {

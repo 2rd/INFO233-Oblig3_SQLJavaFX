@@ -1,5 +1,8 @@
 package Entities;
 
+/**
+ * Klasse for entiteten category, med alle dens attributter, setters og getters.
+ */
 public class Category {
     private int categoryId;
     private String categoryName;

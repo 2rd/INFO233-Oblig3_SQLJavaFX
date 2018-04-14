@@ -7,9 +7,16 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Klasse for å aksessere Kategoritabellen i databasen.
+ */
 public class CategoryDAO {
     private static Connection conn = Main.connextion;
 
+    /**
+     * Legger til en kategori i databasen.
+     * @param category kategorien som skal legges til.
+     */
     public static void addCategory(Category category) {
 
         try {
@@ -25,6 +32,11 @@ public class CategoryDAO {
         }
     }
 
+    /**
+     * Hent en kategori fra databasen.
+     * @param id id'en til kategorien som skal hentes
+     * @return Kategorien som skal hentes.
+     */
     public static Category getCategoryById(int id){
 
         Category category = new Category();
@@ -44,19 +56,10 @@ public class CategoryDAO {
         return category;
     }
 
-    public static void removeCategory(int id){
-
-        try {
-            Statement statement = conn.createStatement();
-            statement.setQueryTimeout(30);
-
-            statement.executeQuery("DELETE FROM category WHERE category_id = " + id);
-
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * Hent alle kategoriene i tabellen.
+     * @return en liste med alle kategoriene i databasen.
+     */
     public static List<Category> getAllCategories() {
         Category currCategory = new Category();
         List<Category> categories = new LinkedList<Category>();
@@ -80,6 +83,10 @@ public class CategoryDAO {
         return categories;
     }
 
+    /**
+     * Endre en eksisterende kategori i databasen.
+     * @param category Kategorien med evt nye egenskaper.
+     */
     public static void editCategory(Category category){
         try {
             PreparedStatement categoryResult = conn.prepareStatement("UPDATE category SET " +

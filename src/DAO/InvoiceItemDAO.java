@@ -7,9 +7,16 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Klasse for å aksessere invoice item-tabellen i databasen.
+ */
 public class InvoiceItemDAO {
     private static Connection conn = Main.connextion;
 
+    /**
+     * Legger til et item i databasen.
+     * @param invoiceItem item som skal legges til.
+     */
     public static void addInvoiceItem(InvoiceItem invoiceItem) {
 
         try {
@@ -25,6 +32,11 @@ public class InvoiceItemDAO {
         }
     }
 
+    /**
+     * Hent alle items som hører til en gitt faktura.
+     * @param invoiceId id'en til fakturaen.
+     * @return Items som er omfattet av fakturaen.
+     */
     public static List<InvoiceItem> getItemsByInvoice(int invoiceId){
 
         List<InvoiceItem> invoiceItems = new LinkedList<>();
@@ -48,20 +60,10 @@ public class InvoiceItemDAO {
 
         return invoiceItems;
     }
-
-    public static void removeInvoiceItem(int invoiceId){
-
-        try {
-            Statement statement = conn.createStatement();
-            statement.setQueryTimeout(30);
-            statement.executeUpdate("DELETE FROM invoice_items WHERE invoice = " + invoiceId);
-
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
-
+    /**
+     * Endre en eksisterende item i databasen.
+     * @param item Item med evt nye egenskaper.
+     */
     public static void editInvoiceItem(InvoiceItem item){
         try {
             PreparedStatement itemResult = conn.prepareStatement("UPDATE invoice_items SET " +

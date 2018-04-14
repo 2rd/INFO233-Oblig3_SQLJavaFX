@@ -1,5 +1,8 @@
 package Entities;
 
+/**
+ * Klasse for entiteten product, med alle dens attributter, setters og getters.
+ */
 public class Product {
     public int getProductId() { return productId; }
 

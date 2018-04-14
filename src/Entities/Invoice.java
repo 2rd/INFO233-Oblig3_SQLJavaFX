@@ -1,5 +1,8 @@
 package Entities;
 
+/**
+ * Klasse for entiteten invoice, med alle dens attributter, setters og getters.
+ */
 public class Invoice {
 
     private int invoiceID;

@@ -18,6 +18,12 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for FXML-filen editProduct.
+ * Gjør det mulig å endre eksisterende produkter i databasen
+ * gjennom et grafisk brukergrensesnitt.
+ * @author Tord Kvifte, 13.04.2018
+ */
 public class EditProductController implements Initializable{
 
     @FXML
@@ -41,13 +47,17 @@ public class EditProductController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            displayCustomers();
+            displayProducts();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void displayCustomers() throws IOException {
+    /**
+     * Henter alle produktene i databasen og viser produktdata i vinduet.
+     * @throws IOException
+     */
+    private void displayProducts() throws IOException {
 
         List<Product> allProducts = ProductDAO.getAllProducts();
         for (Product product : allProducts) {
@@ -66,6 +76,10 @@ public class EditProductController implements Initializable{
         }
     }
 
+    /**
+     * Laster inn vinduet på nytt.
+     * @throws IOException
+     */
     public void update() throws IOException{
         AnchorPane pane = FXMLLoader.load(getClass().getResource("EditProduct.fxml"));
         Scene scene = new Scene(pane);
@@ -73,9 +87,14 @@ public class EditProductController implements Initializable{
         stage.setScene(scene);
     }
 
+    /**
+     * Kalles når endre-knappen klikkes.
+     * Kjører updateProduct og update dersom id-feltet er fylt ut.
+     * @throws IOException
+     */
     public void edit_click() throws IOException{
         if(!ID.getText().trim().isEmpty()){
-            updateAddress();
+            updateProduct();
             update();
         } else {
             currProd.getChildren().add(new Text("***Adresse ID er obligatorisk***"));
@@ -83,7 +102,11 @@ public class EditProductController implements Initializable{
 
     }
 
-    public void updateAddress(){
+    /**
+     * Oppdaterer kolonnene til et produkt i databasen,
+     * basert på info hentet fra tekstfeltene i vinduet.
+     */
+    public void updateProduct(){
 
         int id = Integer.parseInt(ID.getText());
         Product product = ProductDAO.getProductById(id);
@@ -102,6 +125,11 @@ public class EditProductController implements Initializable{
         ProductDAO.editProduct(product);
     }
 
+    /**
+     * Kalles når hjem-knappen klikkes.
+     * Scene1 lastes inn.
+     * @throws IOException
+     */
     public void homebut_click() throws IOException{
         AnchorPane pane = FXMLLoader.load(getClass().getResource("Scene1.fxml"));
         Scene scene = new Scene(pane);

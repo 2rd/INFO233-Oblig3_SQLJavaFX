@@ -7,19 +7,17 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Klasse for å aksessere Adressetabellen i databasen.
+ */
 public class AddressDAO {
 
     private static Connection conn = Main.connextion;
 
-    private static AddressDAO addressDAO = null;
-
-    public static AddressDAO getInstance() {
-        if (addressDAO == null) {
-            addressDAO = new AddressDAO();
-        }
-        return addressDAO;
-    }
-
+    /**
+     * Legger til en adresse i databasen.
+     * @param address adressen som skal legges til.
+     */
     public static void addAddress(Address address) {
 
         try {
@@ -39,6 +37,11 @@ public class AddressDAO {
         }
     }
 
+    /**
+     * Hent en adresse fra databasen.
+     * @param id id'en til adressen som skal hentes
+     * @return Adressen som skal hentes.
+     */
     public static Address getAddressById(int id) {
 
         Address address = new Address();
@@ -61,20 +64,10 @@ public class AddressDAO {
         return address;
     }
 
-
-    public static void removeAddress ( int id){
-
-            try {
-                Statement statement = conn.createStatement();
-                statement.setQueryTimeout(30);
-
-                statement.executeQuery("DELETE FROM address WHERE address_id = " + id);
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-    }
-
+    /**
+     * Hent alle adressene i tabellen.
+     * @return en liste med alle adresseme i databasen.
+     */
     public static List<Address> getAllAddresses() {
         List<Address> addresses = new LinkedList<Address>();
 
@@ -100,6 +93,10 @@ public class AddressDAO {
         return addresses;
     }
 
+    /**
+     * Endre en eksisterende adresse i databasen.
+     * @param address Adressen med evt nye egenskaper.
+     */
     public static void editAddress(Address address){
 
         try {

@@ -18,6 +18,12 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for FXML-filen editCategory.
+ * Gjør det mulig å endre eksisterende kategorier i databasen
+ * gjennom et grafisk brukergrensesnitt.
+ * @author Tord Kvifte, 13.04.2018
+ */
 public class EditCategoryController implements Initializable{
 
     @FXML
@@ -47,6 +53,10 @@ public class EditCategoryController implements Initializable{
         }
     }
 
+    /**
+     * Henter alle kategorier i databasen og viser kategoridata i vinduet.
+     * @throws IOException
+     */
     private void displayCategories() throws IOException {
 
         List<Category> allCategories = CategoryDAO.getAllCategories();
@@ -59,6 +69,10 @@ public class EditCategoryController implements Initializable{
         }
     }
 
+    /**
+     * Laster inn vinduet på nytt.
+     * @throws IOException
+     */
     public void update() throws IOException{
         AnchorPane pane = FXMLLoader.load(getClass().getResource("EditCategory.fxml"));
         Scene scene = new Scene(pane);
@@ -66,6 +80,11 @@ public class EditCategoryController implements Initializable{
         stage.setScene(scene);
     }
 
+    /**
+     * Kalles når endre-knappen klikkes.
+     * Kjører updateCategory og update dersom id-feltet er fylt ut.
+     * @throws IOException
+     */
     public void edit_click() throws IOException{
         if(!ID.getText().trim().isEmpty()){
             updateCategory();
@@ -76,6 +95,10 @@ public class EditCategoryController implements Initializable{
 
     }
 
+    /**
+     * Oppdaterer kolonnene til en kategori i databasen,
+     * basert på info hentet fra tekstfeltene i vinduet.
+     */
     public void updateCategory(){
 
         int id = Integer.parseInt(ID.getText());
@@ -86,6 +109,11 @@ public class EditCategoryController implements Initializable{
         CategoryDAO.editCategory(category);
     }
 
+    /**
+     * Kalles når hjem-knappen klikkes.
+     * Scene1 lastes inn.
+     * @throws IOException
+     */
     public void homebut_click() throws IOException{
         AnchorPane pane = FXMLLoader.load(getClass().getResource("Scene1.fxml"));
         Scene scene = new Scene(pane);

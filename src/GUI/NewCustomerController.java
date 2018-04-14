@@ -15,7 +15,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
+/**
+ * Controller for FXML-filen NewCustomer.
+ * Gjør det mulig å legge til nye kunder og adresser i databasen.
+ * @author Tord Kvifte, 13.04.2018
+ */
 public class NewCustomerController {
 
     @FXML
@@ -24,23 +28,39 @@ public class NewCustomerController {
     @FXML
     Parent parent;
 
-    CustomerDAO customerDAO = new CustomerDAO();
-
-    public void butAddCust_click(ActionEvent actionEvent) throws IOException {
+    /**
+     * Legger til ny kunde og adresse i databasen og går til scene1 når klikket.
+     * @throws IOException
+     */
+    public void butAddCust_click() throws IOException {
         AddressDAO.addAddress(newAddress());
-        customerDAO.addCustomer(newCustomer());
+        CustomerDAO.addCustomer(newCustomer());
         goHome();
     }
 
-    public void homeBut_click(ActionEvent actionEvent) throws IOException {
+    /**
+     * Laster inn Scene1 når klikket.
+     * @throws IOException
+     */
+    public void homeBut_click() throws IOException {
         goHome();
     }
+
+    /**
+     * laster inn scene1.
+     * @throws IOException
+     */
     public void goHome() throws IOException{
         AnchorPane pane = FXMLLoader.load(getClass().getResource("Scene1.fxml"));
         Scene scene = new Scene(pane);
         Stage stage = (Stage)parent.getScene().getWindow();
         stage.setScene(scene);
     }
+
+    /**
+     * Oppretter en ny adresse basert på dataene i feltene.
+     * @return ny adresse
+     */
     public Address newAddress(){
         Address newAddress = new Address();
         newAddress.setAddressId(Integer.parseInt(addressId.getText()));
@@ -50,6 +70,11 @@ public class NewCustomerController {
         newAddress.setPostalTown(postTown.getText());
         return newAddress;
     }
+
+    /**
+     * Oppretter en ny kunde basert på dataene i feltene.
+     * @return ny kunde
+     */
     public Customer newCustomer(){
         Customer newCustomer = new Customer();
         newCustomer.setCustomerId(Integer.parseInt(customerId.getText()));

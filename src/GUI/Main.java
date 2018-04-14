@@ -10,7 +10,10 @@ import javafx.stage.Stage;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-
+/**
+ * Programmets Main-metode.
+ * Oppretter forbindelse med databasen og starter det grafiske grensesnittet.
+ */
 public class Main extends Application{
     private Stage window;
     public static Connection connextion;
@@ -28,7 +31,5 @@ public class Main extends Application{
         primaryStage.setTitle("The Super Sales Register 5000");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-
-
     }
 }

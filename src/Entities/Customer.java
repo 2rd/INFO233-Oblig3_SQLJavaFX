@@ -1,5 +1,8 @@
 package Entities;
 
+/**
+ * Klasse for entiteten customer, med alle dens attributter, setters og getters.
+ */
 public class Customer {
     private int customerId;
     private String customerName;

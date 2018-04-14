@@ -1,5 +1,8 @@
 package Entities;
 
+/**
+ * Klasse for entiteten adress, med alle dens attributter, setters og getters.
+ */
 public class Address {
     private int addressId;
     private String streetNumber;

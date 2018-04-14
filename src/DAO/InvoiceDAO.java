@@ -7,9 +7,16 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Klasse for å aksessere Fakturatabellen i databasen.
+ */
 public class InvoiceDAO {
     private static Connection conn = Main.connextion;
 
+    /**
+     * Legger til en faktura i databasen.
+     * @param invoice fakturaen som skal legges til.
+     */
     public static void addInvoice(Entities.Invoice invoice) {
 
         try {
@@ -26,6 +33,11 @@ public class InvoiceDAO {
         }
     }
 
+    /**
+     * Hent en faktura fra databasen.
+     * @param id id'en til fakturaen som skal hentes
+     * @return Fakturaen som skal hentes.
+     */
     public static Invoice getInvoiceById(int id) {
 
         Invoice invoice = new Invoice();
@@ -45,6 +57,10 @@ public class InvoiceDAO {
         return invoice;
     }
 
+    /**
+     * Hent alle fakturaene i tabellen.
+     * @return en liste med alle fakturaer i databasen.
+     */
     public static List<Invoice> getAllInvoices() {
         Invoice currInvoice = new Invoice();
         java.util.List<Invoice> invoices = new LinkedList<Invoice>();
@@ -69,19 +85,10 @@ public class InvoiceDAO {
         return invoices;
     }
 
-    public static void removeInvoice(int id) {
-
-        try    {
-            Statement statement = conn.createStatement();
-            statement.setQueryTimeout(30);
-            statement.executeUpdate("DELETE FROM invoice WHERE invoice_id = " + id);
-
-        }catch(SQLException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * Endre en eksisterende faktura i databasen.
+     * @param invoice Fakturaen med evt nye egenskaper.
+     */
     public static void editInvoice(Invoice invoice){
         try {
 

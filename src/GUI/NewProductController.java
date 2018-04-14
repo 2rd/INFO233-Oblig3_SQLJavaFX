@@ -14,26 +14,49 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller for FXML-filen NewProduct.
+ * Gjør det mulig å legge til nye kategorier i databasen.
+ * @author Tord Kvifte, 13.04.2018
+ */
 public class NewProductController {
     @FXML
     TextField productId, productName, description, price, categoryId;
     @FXML
     Parent parent;
 
-    public void addProd_click(ActionEvent actionEvent) throws IOException {
+    /**
+     * Legger til nytt produkt i databasen og går til scene1 når klikket.
+     * @throws IOException
+     */
+    public void addProd_click() throws IOException {
         ProductDAO.addProduct(newProduct());
         goHome();
     }
 
-    public void homeBut_click(ActionEvent actionEvent) throws IOException {
+    /**
+     * Laster inn Scene1 når klikket.
+     * @throws IOException
+     */
+    public void homeBut_click() throws IOException {
         goHome();
     }
+
+    /**
+     * Laster inn scene1
+     * @throws IOException
+     */
     public void goHome() throws IOException{
         AnchorPane pane = FXMLLoader.load(getClass().getResource("GUI/Scene1.fxml"));
         Scene scene = new Scene(pane);
         Stage stage = (Stage)parent.getScene().getWindow();
         stage.setScene(scene);
     }
+
+    /**
+     * Oppretter et nytt produkt basert på dataene i feltene.
+     * @return nytt produkt
+     */
     public Product newProduct(){
         Product newProduct = new Product();
         newProduct.setProductId(Integer.parseInt(productId.getText()));

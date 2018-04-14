@@ -7,9 +7,16 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Klasse for å aksessere Produkt-tabellen i databasen.
+ */
 public class ProductDAO {
     private static Connection conn = Main.connextion;
 
+    /**
+     * Legger til et produkt i databasen.
+     * @param product produktet som skal legges til.
+     */
     public static void addProduct(Product product) {
 
         try {
@@ -28,6 +35,11 @@ public class ProductDAO {
         }
     }
 
+    /**
+     * Hent et produkt fra databasen.
+     * @param id id'en til produktet som skal hentes
+     * @return Produktet som skal hentes.
+     */
     public static Product getProductById(int id){
 
         Product product = new Product();
@@ -49,20 +61,11 @@ public class ProductDAO {
 
         return product;
     }
-    public static void removeProduct(int id){
 
-        try {
-            Statement statement = conn.createStatement();
-            statement.setQueryTimeout(30);
-
-            statement.executeQuery("DELETE * FROM product WHERE product_id = " + id);
-
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
-
+    /**
+     * Hent alle produktene i tabellen.
+     * @return en liste med alle produktene i databasen.
+     */
     public static List<Product> getAllProducts() {
         List<Product> products = new LinkedList<Product>();
 
@@ -88,6 +91,10 @@ public class ProductDAO {
         return products;
     }
 
+    /**
+     * Endre en eksisterende produkt i databasen.
+     * @param product Produktet med evt nye egenskaper.
+     */
     public static void editProduct(Product product){
 
         try {

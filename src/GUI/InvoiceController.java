@@ -20,6 +20,12 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for FXML-filen Invoice.
+ * Gjør slik at man kan bla gjennom alle fakturaene i databasen
+ * gjennom et grafisk grensesnitt.
+ * @author Tord Kvifte, 13.04.2018
+ */
 public class InvoiceController implements Initializable{
 
     @FXML
@@ -32,7 +38,6 @@ public class InvoiceController implements Initializable{
     private Parent parent;
     private int currentIndex;
     private List<Invoice> invoices = InvoiceDAO.getAllInvoices();
-    private AddressDAO addressDAO = AddressDAO.getInstance();
 
     /**
      * Called to initialize a controller after its root element has been
@@ -48,15 +53,24 @@ public class InvoiceController implements Initializable{
         displayInvoice(currentIndex);
     }
 
+    /**
+     * Kaller den spesifikke fakturaen som skal vises.
+     * @param index id'en til fakturaen som skal vises.
+     */
     public void displayInvoice(int index){
         currentIndex = index;
         setInvoice(invoices.get(index));
     }
+
+    /**
+     * Legger til all fakturadata i vinduet.
+     * @param invoice fakturaen som skal vises.
+     */
     public void setInvoice(Invoice invoice){
         Entities.Customer customer = CustomerDAO.getCustomerById(invoice.getCustomer());
         List<InvoiceItem> invoiceItems = InvoiceItemDAO.getItemsByInvoice(invoice.getInvoiceId());
 
-        Entities.Address address = addressDAO.getAddressById(customer.getAddress());
+        Entities.Address address = AddressDAO.getAddressById(customer.getAddress());
         fDato.setText(invoice.getDate());
         fId.setText("" + invoice.getInvoiceId());
         cNumber.setText("" + customer.getCustomerId());
@@ -68,13 +82,20 @@ public class InvoiceController implements Initializable{
         displayItems(invoiceItems);
 
     }
+
+    /**
+     * Klarerer items fra vinduet før en annen faktura skal vises.
+     */
     private void hideItems(){
         products.getChildren().clear();
         prices.getChildren().clear();
-
     }
-    private void displayItems(List<InvoiceItem> invoiceItems){
 
+    /**
+     * Viser alle tilhørende items til en faktura
+     * @param invoiceItems en liste med alle items i en faktura.
+     */
+    private void displayItems(List<InvoiceItem> invoiceItems){
         float totalPrice = 0;
         for (InvoiceItem item : invoiceItems) {
             Product product = ProductDAO.getProductById(item.getProduct());
@@ -89,12 +110,23 @@ public class InvoiceController implements Initializable{
         this.totalPrice.setText(""+totalPrice);
     }
 
-    public void backBut_click(ActionEvent actionEvent) throws IOException {
+    /**
+     * Laster inn scene1 når klikket.
+     * @param actionEvent
+     * @throws IOException
+     */
+    public void homebut_click(ActionEvent actionEvent) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("Scene1.fxml"));
         Scene scene = new Scene(pane);
         Stage stage = (Stage)parent.getScene().getWindow();
         stage.setScene(scene);
     }
+
+    /**
+     * Laster inn neste faktura når klikket.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void nextBut_click(ActionEvent actionEvent) throws IOException {
         if(currentIndex < invoices.size() - 1) {
             currentIndex += 1;
@@ -102,6 +134,12 @@ public class InvoiceController implements Initializable{
             displayInvoice(currentIndex);
         }
     }
+
+    /**
+     * Laster inn forrige faktura når klikket.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void prevBut_click(ActionEvent actionEvent) throws IOException {
         if (currentIndex != 0) {
             currentIndex -= 1;

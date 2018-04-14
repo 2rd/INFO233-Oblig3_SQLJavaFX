@@ -23,10 +23,13 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for FXML-filen editCustomer.
+ * Gjør det mulig å endre eksisterende kunder i databasen
+ * gjennom et grafisk brukergrensesnitt.
+ * @author Tord Kvifte, 13.04.2018
+ */
 public class EditCustomersController implements Initializable{
-
-
-
 
     @FXML
     VBox custID, custName, fullAddress, phone, account, currCust, editFields, editLabels;
@@ -55,6 +58,10 @@ public class EditCustomersController implements Initializable{
         }
     }
 
+    /**
+     * Henter alle kundene i databasen og viser kundedata i vinduet.
+     * @throws IOException
+     */
     private void displayCustomers() throws IOException {
 
         List<Customer> allCustomers = CustomerDAO.getAllCustomers();
@@ -76,6 +83,10 @@ public class EditCustomersController implements Initializable{
         }
     }
 
+    /**
+     * Laster inn vinduet på nytt.
+     * @throws IOException
+     */
     public void update() throws IOException{
         AnchorPane pane = FXMLLoader.load(getClass().getResource("EditCustomer.fxml"));
         Scene scene = new Scene(pane);
@@ -83,6 +94,11 @@ public class EditCustomersController implements Initializable{
         stage.setScene(scene);
     }
 
+    /**
+     * Kalles når endre-knappen klikkes.
+     * Kjører updateCustomer og update dersom id-feltet er fylt ut.
+     * @throws IOException
+     */
     public void edit_click() throws IOException{
         if(!ID.getText().trim().isEmpty()){
             updateCustomer();
@@ -93,6 +109,10 @@ public class EditCustomersController implements Initializable{
 
     }
 
+    /**
+     * Oppdaterer kolonnene til en kunde i databasen,
+     * basert på info hentet fra tekstfeltene i vinduet.
+     */
     public void updateCustomer(){
 
         int id = Integer.parseInt(ID.getText());
@@ -112,6 +132,11 @@ public class EditCustomersController implements Initializable{
         CustomerDAO.editCustomer(customer);
     }
 
+    /**
+     * Kalles når hjem-knappen klikkes.
+     * Scene1 lastes inn.
+     * @throws IOException
+     */
     public void homebut_click() throws IOException{
         AnchorPane pane = FXMLLoader.load(getClass().getResource("Scene1.fxml"));
         Scene scene = new Scene(pane);

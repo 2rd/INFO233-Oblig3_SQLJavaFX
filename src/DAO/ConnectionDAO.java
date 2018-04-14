@@ -4,7 +4,7 @@ import java.io.*;
 import java.sql.*;
 
 /**
- * Klasse for å opprette en database med et sql-schema.
+ * Klasse for å koble til en database.
  * @author Tord Kvifte
  */
 public class ConnectionDAO {
@@ -12,14 +12,14 @@ public class ConnectionDAO {
     private static File schema = new File("oblig3v1_database.sql");
 
     /**
-     * Oppretter tilkobling til en database.
+     * Oppretter tilkobling til databasen.
      * Legger til schema dersom databasen er tom.
      */
     public static Connection getConnection() {
 
         Connection conn = null;
         try {
-            String DBUrl = "jdbc:sqlite:test.db";
+            String DBUrl = "jdbc:sqlite:oblig3.db";
             conn = DriverManager.getConnection(DBUrl);
 
             if (conn != null) {
@@ -31,6 +31,9 @@ public class ConnectionDAO {
         return conn;
     }
 
+    /**
+     * Stenger tilkoblingen til databasen.
+     */
     public static void closeConnection(){
         try{
             if(getConnection() != null){
